@@ -1,0 +1,55 @@
+import { Button, TextEdit } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    // { "name": "John", "age": 30, "classes" : ["Math", "English", "Science"] }
+    height: 1024px;
+    width: 768px;
+    in-out property <string> formattedJson: "";
+    callback format-json(string);
+    GridLayout {
+        padding: 10px;
+        spacing: 10px;
+        Row {
+            Button {
+                text: "Click here to format JSON below";
+                clicked => {
+                    root.format-json(unformattedJson.text);
+                }
+            }
+        }
+        Row {
+            Text {
+                width: root.width - 20px;
+                height: 40px;
+                horizontal-alignment: center;
+                font-size: 20px;
+                text: "Unformatted JSON";
+            }
+        }
+        Row {
+            unformattedJson := TextEdit {
+                font-size: 14px;
+                width: root.width - 20px;
+                height: root.height/5;
+            }
+        }
+        Row {
+            Text {
+                width: root.width - 20px;
+                height: 40px;
+                horizontal-alignment: center;
+                font-size: 20px;
+                text: "Formatted JSON";
+            }
+        }
+        Row {
+            TextEdit {
+                font-size: 14px;
+                width: root.width - 20px;
+                height: root.height;
+                text: root.formattedJson;
+            }
+
+        }
+    }       
+}
